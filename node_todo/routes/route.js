@@ -16,4 +16,10 @@ router.post("/", function(req, res, next) {
   res.redirect("/");
 });
 
+router.get("/users", function(req, res, next) {
+  res.render("users", {
+    title: "Users | ToDo App",
+  });
+});
+
 module.exports = router;
