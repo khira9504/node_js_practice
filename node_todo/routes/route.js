@@ -13,24 +13,24 @@ const dbGet = mysql.createConnection({
 
 router.get("/", function(req, res, next) {
   dbGet.query(`select * from tasks;`, (err, results) => {
-    res.render('index', {
-      title: 'ToDo App',
+    res.render("index", {
+      title: "ToDo App",
       todos: results,
     });
   });
 });
 
-router.post('/', function (req, res, next) {
+router.post("/", function (req, res, next) {
   dbGet.connect((err) => {
     if (err) {
-      console.log('error connecting: ' + err.stack);
+      console.log("error connecting: " + err.stack);
       return
     }
-    console.log('success');
+    console.log("success");
   });
-  dbGet.query(`insert into tasks (user_id, content) values (1, '${req.body.add}');`, (error, results) => {
+  dbGet.query(`insert into tasks (user_id, content) values (1, "${req.body.add}");`, (error, results) => {
     console.log(error);
-    res.redirect('/');
+    res.redirect("/");
   });
 });
 
