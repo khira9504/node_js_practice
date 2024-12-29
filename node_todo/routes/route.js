@@ -1,5 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const mysql = require("mysql");
+
+require('dotenv').config();
+const env = process.env.mysql_pwd;
+
+const dbGet = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: process.env.mysql_pwd,
+  database: process.env.mysql_db_name
+});
 
 let todos = [];
 
