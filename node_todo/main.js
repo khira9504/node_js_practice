@@ -2,7 +2,7 @@
 
 const port = 3000;
 const http = require("http");
-const fs = require("fs");
+const fs = require("node:fs");
 
 function readFile(file, res) {
   fs.readFile(`./${file}`, (err, data) => {
