@@ -2,7 +2,6 @@
 
 function greet(name) {
 	console.log(`hello ${name}`);
-}
+};
 
-greet('Tanaka');
-greet('Suzuki');
+module.exports = greet;
