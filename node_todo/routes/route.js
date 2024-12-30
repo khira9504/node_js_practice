@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const knex = require("../db/knex");
 const mysql = require("mysql2");
 
 require("dotenv").config();
@@ -11,8 +12,15 @@ const dbGet = mysql.createConnection({
   database: process.env.mysql_db_name
 });
 
-router.get("/", function(req, res, next) {
-  dbGet.query(`select * from tasks;`, (err, results) => {
+router.get("/", (req, res, next) => {
+  knex("tasks").select("*").then((results) => {
+    console.log(results);
+    res.render("index", {
+      title: "ToDo App",
+      todos: results,
+    });
+  }).catch((err) => {
+    console.error(err);
     res.render("index", {
       title: "ToDo App",
       todos: results,
