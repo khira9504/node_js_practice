@@ -1,16 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const knex = require("../db/knex");
-const mysql = require("mysql2");
-
-require("dotenv").config();
-
-const dbGet = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: process.env.mysql_pwd,
-  database: process.env.mysql_db_name
-});
 
 router.get("/", (req, res, next) => {
   knex("tasks").select("*").then((results) => {
@@ -29,16 +19,13 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", function (req, res, next) {
-  dbGet.connect((err) => {
-    if (err) {
-      console.log("error connecting: " + err.stack);
-      return
-    }
-    console.log("success");
-  });
-  dbGet.query(`insert into tasks (user_id, content) values (1, "${req.body.add}");`, (error, results) => {
-    console.log(error);
+  knex("tasks").insert({ user_id: 1, content: req.body.add }).then(() => {
     res.redirect("/");
+  }).catch((err) => {
+    console.error(err);
+    res.render('index', {
+      title: 'ToDo App',
+    });
   });
 });
 
