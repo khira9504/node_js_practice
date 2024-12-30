@@ -1,47 +1,40 @@
 // Update with your config settings.
-
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
+require("dotenv").config();
 module.exports = {
-
   development: {
-    client: 'sqlite3',
+    client: "mysql",
     connection: {
-      filename: './dev.sqlite3'
-    }
+      database: process.env.mysql_db_name,
+      user: "root",
+      password: process.env.mysql_pwd,
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
   },
-
   staging: {
-    client: 'postgresql',
+    client: "mysql",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: process.env.mysql_db_name,
+      user: "root",
+      password: process.env.mysql_pwd,
     },
     pool: {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   },
-
   production: {
-    client: 'postgresql',
+    client: "mysql",
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      database: process.env.mysql_db_name,
+      user: "root",
+      password: process.env.mysql_pwd,
     },
     pool: {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
   }
-
 };
