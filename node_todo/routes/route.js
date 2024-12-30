@@ -23,16 +23,12 @@ router.post("/", function (req, res, next) {
     res.redirect("/");
   }).catch((err) => {
     console.error(err);
-    res.render('index', {
-      title: 'ToDo App',
+    res.render("index", {
+      title: "ToDo App",
     });
   });
 });
 
-router.get("/users", function(req, res, next) {
-  res.render("users", {
-    title: "Users | ToDo App",
-  });
-});
+router.use("/signup", require("./signup"));
 
 module.exports = router;
