@@ -8,30 +8,24 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  knex("users")
-    .where({
-      name: username,
-      password: password,
-    })
-    .select("*")
-    .then((results) => {
-      if (results.length === 0) {
-        res.render("signin", {
-          title: "Sign in",
-          errorMessage: ["ユーザが見つかりません"],
-        });
-      } else {
-        res.redirect('/');
-      }
-    })
-    .catch(function (err) {
-      console.error(err);
+  knex("users").where({ name: req.body.username, password: req.body.password }).select("*").then((results) => {
+    if (results.length === 0) {
       res.render("signin", {
         title: "Sign in",
-        errorMessage: [err.sqlMessage],
-        isAuth: false,
+        errorMessage: ["ユーザが見つかりません"],
       });
+    } else {
+      res.redirect("/");
+    }
+  })
+  .catch(function (err) {
+    console.error(err);
+    res.render("signin", {
+      title: "Sign in",
+      errorMessage: [err.sqlMessage],
+      isAuth: false,
     });
+  });
 })
 
 module.exports = router;
