@@ -8,6 +8,8 @@ app.set("view engine", "ejs");
 
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const cookieSession = require("cookie-session");
+const secret = "secretCuisine123";
 
 app.use(logger("dev"));
 app.use(express.json());
