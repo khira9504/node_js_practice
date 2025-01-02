@@ -3,6 +3,8 @@ const router = express.Router();
 const knex = require("../db/knex");
 
 router.get("/", (req, res, next) => {
+  const userId = req.session.userid;
+  const isAuth = Boolean(userId);
   knex("tasks").select("*").then((results) => {
     console.log(results);
     res.render("index", {
