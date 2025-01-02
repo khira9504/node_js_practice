@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const knex = require("../db/knex");
 
 router.get("/", (req, res, next) => {
   res.render("signin", {
@@ -24,9 +25,8 @@ router.post("/", (req, res, next) => {
     res.render("signin", {
       title: "Sign in",
       errorMessage: [err.sqlMessage],
-      isAuth: false,
     });
   });
-})
+});
 
 module.exports = router;
