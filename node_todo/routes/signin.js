@@ -9,7 +9,10 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  knex("users").where({ name: req.body.username, password: req.body.password }).select("*").then((results) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  knex("users").where({ name: username, password: password }).select("*").then((results) => {
     if (results.length === 0) {
       res.render("signin", {
         title: "Sign in",

@@ -10,12 +10,14 @@ router.get("/", (req, res, next) => {
     res.render("index", {
       title: "ToDo App",
       todos: results,
+      isAuth: isAuth,
     });
   }).catch((err) => {
     console.error(err);
     res.render("index", {
       title: "ToDo App",
       todos: results,
+      isAuth: isAuth,
     });
   });
 });
@@ -29,6 +31,7 @@ router.post("/", function (req, res, next) {
     console.error(err);
     res.render("index", {
       title: "ToDo App",
+      isAuth: isAuth,
     });
   });
 });
