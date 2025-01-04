@@ -4,13 +4,13 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cookieSession = require("cookie-session");
-const secret = "secretCuisine123";
+require("dotenv").config();
 
 const app = express();
 
 app.use(cookieSession({
   name: "session",
-  keys: [secret],
+  keys: [process.env.cookie_key],
   maxAge: 24 * 60 * 60 * 1000,
 }));
 
