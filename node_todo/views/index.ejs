@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <form action="/" method="post">
-      <label>タスクの追加</label>
-      <input required type="text" name="add" placeholder="何をする?"/>
-      <input type="submit" value="追加"/>
-    </form>
-    <ul>
-      <% for(let todo of todos) { %>
-      <li><span><%= todo.content %></span></li>
-      <% } %>
-    </ul>
+    <% if(isAuth) { %>
+      <h1><%= title %></h1>
+      <form action="/" method="post">
+        <label>タスクの追加</label>
+        <input required type="text" name="add" placeholder="何をする?"/>
+        <input type="submit" value="追加"/>
+      </form>
+    <% } else { %>
+      <ul>
+        <% for(let todo of todos) { %>
+        <li><span><%= todo.content %></span></li>
+        <% } %>
+      </ul>
+      <h1>Welcome to the TodoApp</h1>
+      <a href="/signup">Sign up now!</a>
+    <% } %>
   </body>
 </html>

@@ -21,6 +21,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", function (req, res, next) {
+  const userId = req.session.userid;
+  const isAuth = Boolean(userId);
   knex("tasks").insert({ user_id: 1, content: req.body.add }).then(() => {
     res.redirect("/");
   }).catch((err) => {
