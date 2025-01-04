@@ -19,7 +19,7 @@ router.post("/", (req, res, next) => {
     } else if(req.body.password === req.body.repassword) {
       const hashedPass = await bcrypt.hash(req.body.password, 10);
       knex("users").insert({ name: req.body.username, password: hashedPass }).then(() => {
-        res.redirect("/");
+        res.redirect("/login");
       }).catch((err) => {
         console.error(err);
         res.render("signup", {
